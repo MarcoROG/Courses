@@ -1,0 +1,28 @@
+version: "3"
+services:
+  database:
+    container_name: courses_database
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=develop
+      - MYSQL_USER=root
+    image: mariadb:10.1
+    ports:
+      - "3306:3306"
+  redis:
+    container_name: courses_redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+  web:
+    container_name: courses_web
+    depends_on:
+      - database
+      - redis
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+    image: 6gosrl/laravel
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
