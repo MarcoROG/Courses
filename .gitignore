@@ -11,4 +11,5 @@ storage/*.key
 Homestead.yaml
 Homestead.json
 .rocketeer/
-
+.phpstorm.meta.php
+_ide_helper.php

@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateChaptersTable extends Migration
+final class CreateChaptersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +13,13 @@ class CreateChaptersTable extends Migration
     public function up()
     {
         Schema::create('chapters', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name',100);
-            $table->integer('course_id')->unsigned();
-            $table->foreign('course_id')->references('id')->on('courses')->onUpdate('cascade')->onDelete('set null');
+            $table->unsignedBigInteger('course_id')->index();
             $table->timestamps();
             $table->softDeletes();
+    
+            $table->foreign('course_id')->references('id')->on('courses')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
