@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateObservationsTable extends Migration
+final class CreateObservationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +13,14 @@ class CreateObservationsTable extends Migration
     public function up()
     {
         Schema::create('observations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title',100);
             $table->text('content');
-            $table->integer('result_id')->unsigned();
-            $table->foreign('result_id')->references('id')->on('results')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('result_id')->index();
             $table->timestamps();
             $table->softDeletes();
+    
+            $table->foreign('result_id')->references('id')->on('results')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
