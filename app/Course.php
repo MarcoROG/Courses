@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class Course extends Model
@@ -20,5 +21,15 @@ final class Course extends Model
     protected $casts = [
         'semester' => 'boolean',
     ];
+    
+    /**
+     * A Course may have multiple chapters
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function chapters() : HasMany
+    {
+        return $this->hasMany(Chapter::class);
+    }
     
 }
