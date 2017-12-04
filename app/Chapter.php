@@ -23,7 +23,7 @@ final class Chapter extends Model
     ];
     
     /**
-     * One chapter may be related to a course
+     * One chapter may be related to a course.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -31,4 +31,35 @@ final class Chapter extends Model
     {
         return $this->belongsTo(Course::class)->withDefault();
     }
+
+    /**
+     * The lecture definitions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function definitions()
+    {
+        return $this->morphedByMany(Definition::class,'content');
+    }
+
+    /**
+     * The lecture results.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function results()
+    {
+        return $this->morphedByMany(Result::class,'content');
+    }
+
+    /**
+     * The lecture observations.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function observations()
+    {
+        return $this->morphedByMany(Observation::class,'content');
+    }
+
 }

@@ -16,4 +16,22 @@ final class Definition extends Model
     protected $fillable = ['name', 'content'];
     
     protected $guarded = ['id'];
+
+    /**
+     * The results concerning the definition.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function results() : BelongsToMany
+    {
+        return $this->belongsToMany(Result::class);
+    }
+
+    /**
+     * The chapters featuring the definition.
+     */
+    public function chapters()
+    {
+        return $this->morphToMany(Chapter::class, 'content');
+    }
 }
