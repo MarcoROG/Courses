@@ -15,7 +15,7 @@ final class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 100);
-            $table->boolean('boolean'); // TODO Fix naming
+            $table->boolean('semester'); // TODO Fix type
             $table->timestamps();
             $table->softDeletes();
         });
