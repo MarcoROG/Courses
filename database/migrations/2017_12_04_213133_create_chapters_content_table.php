@@ -14,7 +14,7 @@ class CreateChaptersContentTable extends Migration
     public function up()
     {
         Schema::create('chapters_content', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('chapter_id')->index();
             $table->foreign('chapter_id')->references('id')->on('chapters')->onUpdate('cascade')->onDelete('cascade');
             $table->string('content_type');
