@@ -31,4 +31,12 @@ final class Observation extends Model
     {
         return $this->belongsTo(Result::class);
     }
+
+    /**
+     * The chapters featuring the observation.
+     */
+    public function chapters()
+    {
+        return $this->morphToMany(Chapter::class, 'content');
+    }
 }

@@ -19,12 +19,30 @@ final class Result extends Model
     protected $guarded = ['id'];
     
     /**
-     * A result may have multiple observations
+     * A result may have multiple observations.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function observations() : HasMany
     {
         return $this->hasMany(Observation::class);
+    }
+
+    /**
+     * The definitions the result relies upon.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function definitions() : BelongsToMany
+    {
+        return $this->belongsToMany(Definition::class);
+    }
+
+    /**
+     * The chapters featuring the result.
+     */
+    public function chapters()
+    {
+        return $this->morphToMany(Chapter::class, 'content');
     }
 }
